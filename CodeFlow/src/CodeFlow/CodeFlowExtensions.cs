@@ -1,0 +1,48 @@
+﻿using System;
+using System.Threading.Tasks;
+
+namespace CodeFlow
+{
+    public static class CodeFlowExtensions
+    {
+	    public static Task<Result<T>> ProcessWithPipelines<T>(this CodeFlowResult<T> src, IHandler handler)
+	    {
+		    return src(handler);
+	    }
+	    public static Task<Result<T>> Process<T>(this CodeFlowResult<T> src)
+	    {
+		    return src(new EmptyHandler());
+	    }
+
+	    public static CodeFlowResult<TR> Run<T, TR>(this CodeFlowResult<T> src, Func<T, Task<Result<TR>>> func)
+	    {
+		    return async (handler) =>
+		    {
+			    var data = await src(handler).ConfigureAwait(false);
+			    if (data.IsSuccess)
+			    {
+				    return await handler.Handle(() => func(data.Value)).ConfigureAwait(false);
+			    }
+			    return Result.Fail<TR>(data.Error);
+		    };
+	    }
+
+        public static CodeFlowResult<TR> Run<T, TR>(this CodeFlowResult<T> src, Func<T, Result<TR>> func)
+	    {
+		    return async (handler) =>
+		    {
+			    var data = await src(handler).ConfigureAwait(false);
+			    if (data.IsSuccess)
+			    {
+				    return await handler.Handle(() => func(data.Value).ToAsync()).ConfigureAwait(false);
+			    }
+			    return Result.Fail<TR>(data.Error);
+		    };
+	    }
+
+        public static Task<Result<T>> ToAsync<T>(this Result<T> result)
+        {
+            return Task.FromResult(result);
+        }
+    }
+}
