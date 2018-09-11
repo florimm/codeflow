@@ -3,18 +3,18 @@ using System.Threading.Tasks;
 
 namespace CodeFlow
 {
-    public static class CodeFlowExtensions
+    public static class FlowExtensions
     {
-	    public static Task<Result<T>> ProcessWithPipelines<T>(this CodeFlowResult<T> src, IHandler handler)
+	    public static Task<Result<T>> ProcessWithPipelines<T>(this FlowResult<T> src, IHandler handler)
 	    {
 		    return src(handler);
 	    }
-	    public static Task<Result<T>> Process<T>(this CodeFlowResult<T> src)
+	    public static Task<Result<T>> Process<T>(this FlowResult<T> src)
 	    {
 		    return src(new EmptyHandler());
 	    }
 
-	    public static CodeFlowResult<TR> Run<T, TR>(this CodeFlowResult<T> src, Func<T, Task<Result<TR>>> func)
+	    public static FlowResult<TR> Run<T, TR>(this FlowResult<T> src, Func<T, Task<Result<TR>>> func)
 	    {
 		    return async (handler) =>
 		    {
@@ -27,7 +27,7 @@ namespace CodeFlow
 		    };
 	    }
 
-        public static CodeFlowResult<TR> Run<T, TR>(this CodeFlowResult<T> src, Func<T, Result<TR>> func)
+        public static FlowResult<TR> Run<T, TR>(this FlowResult<T> src, Func<T, Result<TR>> func)
 	    {
 		    return async (handler) =>
 		    {
