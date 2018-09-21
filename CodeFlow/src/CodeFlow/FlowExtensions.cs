@@ -5,7 +5,7 @@ namespace CodeFlow
 {
     public static class FlowExtensions
     {
-	    public static Task<Result<T>> ProcessWithPipelines<T>(this FlowResult<T> src, IHandler handler)
+	    public static Task<Result<T>> ProcessWithPipelines<T>(this FlowResult<T> src, IPipeline handler)
 	    {
 		    return src(handler);
 	    }

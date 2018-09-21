@@ -2,12 +2,12 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ConsoleSample.Handlers
+namespace ConsoleSample.Pipelines
 {
-    public class TryCatchHandler : IHandler
+    public class TryCatchHandler : IPipeline
     {
-	    public IHandler next;
-	    public TryCatchHandler(IHandler handler = null)
+	    public IPipeline next;
+	    public TryCatchHandler(IPipeline handler = null)
 	    {
 		    next = handler;
 	    }

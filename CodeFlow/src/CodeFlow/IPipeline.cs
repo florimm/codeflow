@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace CodeFlow
 {
-    public interface IHandler
+    public interface IPipeline
     {
 	    Task<Result<TR>> Handle<TR>(Func<Task<Result<TR>>> func);
     }

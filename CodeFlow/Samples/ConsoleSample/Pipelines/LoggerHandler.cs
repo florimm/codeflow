@@ -2,12 +2,12 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ConsoleSample.Handlers
+namespace ConsoleSample.Pipelines
 {
-    public class LoggerHandler : IHandler
+    public class LoggerHandler : IPipeline
     {
-	    public IHandler next;
-	    public LoggerHandler(IHandler handler = null)
+	    public IPipeline next;
+	    public LoggerHandler(IPipeline handler = null)
 	    {
 		    next = handler;
 	    }

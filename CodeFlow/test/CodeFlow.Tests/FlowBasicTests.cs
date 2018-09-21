@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CodeFlow.Tests
 {
-    public class UnitTest1
+    public class FlowBasicTests
     {
         [Fact]
         public void Test1()

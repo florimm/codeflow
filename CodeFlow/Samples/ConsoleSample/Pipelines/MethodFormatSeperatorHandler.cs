@@ -2,13 +2,13 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ConsoleSample.Handlers
+namespace ConsoleSample.Pipelines
 {
 
-    public class MethodFormatSeperatorHandler : IHandler
+    public class MethodFormatSeperatorHandler : IPipeline
     {
-	    public IHandler next;
-	    public MethodFormatSeperatorHandler(IHandler handler = null)
+	    public IPipeline next;
+	    public MethodFormatSeperatorHandler(IPipeline handler = null)
 	    {
 		    next = handler;
 	    }

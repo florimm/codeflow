@@ -2,7 +2,7 @@
 
 namespace CodeFlow
 {
-    public delegate Task<Result<T>> FlowResult<T>(IHandler handler);
+    public delegate Task<Result<T>> FlowResult<T>(IPipeline handler);
     
     public class Flow
     {
