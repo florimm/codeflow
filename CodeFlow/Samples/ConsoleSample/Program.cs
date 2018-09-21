@@ -1,7 +1,7 @@
-﻿using ConsoleSample.Handlers;
-using System;
+﻿using System;
 using CodeFlow;
 using System.Threading.Tasks;
+using ConsoleSample.Pipelines;
 
 namespace ConsoleSample
 {
